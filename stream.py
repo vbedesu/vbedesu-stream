@@ -22,3 +22,4 @@ if args.stream:
     ), shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     rtsp_process.communicate()
+
