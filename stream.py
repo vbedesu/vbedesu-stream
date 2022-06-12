@@ -15,7 +15,7 @@ if args.join:
 
 
 if args.stream:
-    rtsp_process = subprocess.Popen("rtsp-simple-server", shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    rtsp_process = subprocess.Popen("./rtsp-simple-server", shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     ffmpeg_process = subprocess.Popen("ffmpeg -fragment_size 256 -f pulse -i 0 -framerate 24 -video_size 1920x1080 -probesize 32 -f x11grab -i :0.0+0,0 -c:v libx264 -maxrate {maxrate}k -preset fast -tune zerolatency -x264-params \"intra-refresh=1\" -bufsize {bufsize}k -g 120 -refs 1 -f_strict experimental -syncpoints none -threads 3 -f rtsp 'rtsp://localhost:8554/stream'".format(
         maxrate=args.stream_bitrate,
         bufsize=args.stream_bitrate*2
